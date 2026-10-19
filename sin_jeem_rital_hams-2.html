@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>سين وجيم | ريتال وهمس</title>
+<style>
+:root{--ink:#25233b;--muted:#77758e;--pink:#f477a8;--purple:#8874e8;--cream:#fffaf5;--mint:#7ddbc4;--gold:#ffc95c;--panel:#fff}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(140deg,#fff6fb,#f2f0ff 55%,#edfff9);color:var(--ink);font-family:Tahoma,Arial,sans-serif;min-height:100vh}
+button,input,select{font:inherit}button{cursor:pointer;transition:.18s}button:hover{transform:translateY(-2px);filter:brightness(1.03)}button:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.wrap{max-width:1100px;margin:auto;padding:22px 16px 44px}.hero{position:relative;overflow:hidden;border-radius:28px;padding:28px;background:linear-gradient(120deg,#8874e8,#bd83e9 55%,#f477a8);color:white;box-shadow:0 16px 40px #8d70df30}.hero:before,.hero:after{content:"✦";position:absolute;color:#ffffff42;font-size:95px}.hero:before{left:22px;top:-24px}.hero:after{right:25%;bottom:-55px;font-size:140px}.kicker{font-size:13px;font-weight:bold;opacity:.9}.hero h1{font-size:clamp(32px,6vw,54px);margin:10px 0 7px;letter-spacing:-1px}.hero p{margin:0;line-height:1.8;max-width:700px}.authors{display:inline-flex;flex-wrap:wrap;gap:8px;margin-top:18px}.authors span{background:#ffffff22;border:1px solid #ffffff40;padding:8px 12px;border-radius:99px;font-size:13px}
+.section{margin-top:18px;background:#ffffffd9;border:1px solid #ffffff;border-radius:23px;padding:18px;box-shadow:0 10px 35px #5d4e9910}.section-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}.section h2{font-size:20px;margin:0}.muted{color:var(--muted);font-size:13px;line-height:1.7}
+.scoreboard{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.team{position:relative;text-align:center;border-radius:20px;padding:16px 10px;background:#fff;border:2px solid transparent;box-shadow:0 8px 20px #5b4c9910;overflow:hidden}.team:nth-child(1){--team:#f477a8}.team:nth-child(2){--team:#8874e8}.team:nth-child(3){--team:#34bfa1}.team.selected{border-color:var(--team);box-shadow:0 8px 25px color-mix(in srgb,var(--team) 25%,transparent)}.team-name{font-size:20px;font-weight:900}.team-score{font-size:clamp(30px,5vw,44px);font-weight:1000;color:var(--team);margin:4px 0;font-variant-numeric:tabular-nums;transition:transform .25s}.team-label{font-size:12px;color:var(--muted)}.select-team{margin-top:10px;background:var(--team);color:white;border-radius:11px;padding:8px 12px;border:0;font-weight:bold;font-size:12px}
+.levels{display:flex;gap:8px;flex-wrap:wrap}.level{padding:9px 15px;border:1px solid #e6e0f5;border-radius:99px;background:white;color:var(--ink);font-weight:bold;font-size:13px}.level.active{background:var(--ink);color:white;border-color:var(--ink)}
+.qgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.qcard{min-height:118px;text-align:right;border:1px solid #e9e4f5;border-radius:17px;padding:14px;background:linear-gradient(145deg,#fff,#faf8ff);color:var(--ink);display:flex;flex-direction:column;justify-content:space-between;gap:10px}.qcard .num{font-size:12px;color:var(--muted)}.qcard .qtitle{font-weight:800;line-height:1.6}.qcard .qstate{font-size:11px;color:var(--purple);font-weight:bold}.qcard.used{background:#f0eef5;color:#a4a0b5;border-style:dashed}.qcard.used .qstate{color:#8b879c}
+.row-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.btn{border:0;border-radius:13px;padding:12px 16px;font-weight:800}.btn.primary{background:var(--purple);color:white}.btn.soft{background:#f0ecff;color:#5b4bb0}.btn.pink{background:#ffe5ef;color:#b23e70}.btn.dark{background:var(--ink);color:white}.btn.green{background:#dcf9ef;color:#16765e}
+.notice{padding:12px 14px;border-radius:13px;background:#f4f0ff;color:#6356a4;font-size:13px;line-height:1.7;margin-top:13px}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:24px 10px}
+.overlay{position:fixed;inset:0;background:#211b39b8;z-index:5;display:none;align-items:center;justify-content:center;padding:16px}.overlay.show{display:flex}.modal{width:min(680px,100%);max-height:92vh;overflow:auto;background:var(--cream);border-radius:26px;padding:24px;box-shadow:0 25px 90px #1e123855;position:relative}.modal h2{margin:10px 0;font-size:clamp(22px,4vw,30px);line-height:1.7}.badge{display:inline-block;background:#f0eaff;color:#6956bd;border-radius:99px;padding:7px 11px;font-size:12px;font-weight:bold}.answer{display:none;background:#e9fbf5;border:1px solid #bceee0;border-radius:14px;padding:14px;margin:14px 0;font-weight:bold;line-height:1.8}.answer.show{display:block}.close{position:absolute;left:16px;top:16px;border:0;background:#f0edf7;border-radius:10px;padding:8px 11px;color:var(--ink)}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:18px 0}.option{border:2px solid #e6e0f2;border-radius:14px;background:white;color:var(--ink);padding:14px;text-align:right;line-height:1.6;font-weight:bold}.option .letter{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:9px;background:#f1edff;color:#6956bd;margin-left:8px}.option.correct{border-color:#35b98d;background:#e8fbf3}.option.wrong{border-color:#f17d99;background:#fff0f4}.option:disabled{opacity:1}.result{display:none;padding:14px;border-radius:14px;margin:12px 0;line-height:1.8;font-weight:bold}.result.show{display:block}.result.ok{background:#e8fbf3;color:#16765e}.result.no{background:#fff0f4;color:#b23e70}.modal-actions{display:flex;gap:8px;flex-wrap:wrap}.modal-actions .btn{flex:1;min-width:120px}.settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.setting{background:#faf8ff;border:1px solid #e8e2f5;border-radius:15px;padding:13px}.setting label{display:block;font-size:13px;font-weight:bold;margin-bottom:8px}.setting input[type=range]{width:100%;accent-color:var(--purple)}.setting select,.setting input[type=text]{width:100%;border:1px solid #e2dcef;border-radius:10px;background:white;padding:10px;color:var(--ink)}.toggle{display:flex;align-items:center;gap:9px}.toggle input{accent-color:var(--purple);width:18px;height:18px}.toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,130px);z-index:10;background:#28243e;color:white;border-radius:16px;padding:13px 18px;box-shadow:0 12px 30px #0002;display:flex;gap:9px;align-items:center;opacity:0;transition:.4s;max-width:90vw}.toast.show{transform:translate(-50%,0);opacity:1}.toast strong{color:var(--gold)}.toast .spark{font-size:22px}
+.winner{position:fixed;inset:0;background:linear-gradient(140deg,#7764d7f5,#d96fa5f5);color:white;z-index:20;display:none;align-items:center;justify-content:center;text-align:center;padding:24px;overflow:hidden}.winner.show{display:flex}.winner-inner{position:relative;z-index:2;max-width:700px}.trophy{font-size:clamp(70px,14vw,120px);animation:bob 1.4s ease-in-out infinite}.winner h2{font-size:clamp(32px,7vw,62px);margin:10px 0}.winner p{font-size:clamp(16px,3vw,22px);line-height:1.8}.winner-score{font-size:clamp(42px,9vw,72px);font-weight:1000;color:#ffe38d}.confetti{position:absolute;top:-30px;width:10px;height:18px;border-radius:3px;animation:fall linear infinite;opacity:.9;pointer-events:none}.winner .btn{margin-top:15px;background:white;color:#5b4ab3}
+@keyframes fall{to{transform:translateY(115vh) rotate(760deg)}}@keyframes bob{50%{transform:translateY(-12px) rotate(4deg)}}@keyframes pop{0%{transform:scale(.75);opacity:.3}60%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}.pop{animation:pop .45s ease}
+@media(max-width:680px){.wrap{padding:12px 10px 30px}.hero{padding:22px 18px}.section{padding:13px}.scoreboard{gap:7px}.team{padding:12px 5px}.team-name{font-size:15px}.team-score{font-size:30px}.select-team{padding:7px 5px;font-size:10px}.qgrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.qcard{min-height:110px;padding:11px}.settings-grid{grid-template-columns:1fr}.modal{padding:20px 16px}.modal h2{padding-top:18px}.options{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+ <div class="kicker">مشروع مدرسي تفاعلي ✨</div><h1>سين وجيم 🎀</h1>
+ <p>فكّري بسرعة، جاوبي بثقة، واجمعي النقاط مع مجموعتك! مين بتكون بطلة التحدّي؟</p>
+ <div class="authors"><span>إعداد الطالبة: ريتال مهدي</span><span>إعداد الطالبة: همس الغامدي</span></div>
+</header>
+<section class="section">
+ <div class="section-head"><h2>🏆 لوحة النقاط</h2><span class="muted">النقاط تُضاف تلقائيًا عند الإجابة الصحيحة</span></div>
+ <div class="scoreboard" id="scoreboard"></div>
+ <div class="row-actions"><button class="btn soft" id="settingsBtn">⚙️ إعدادات المسابقة</button><button class="btn pink" id="winnerBtn">🏆 إعلان الفائزات</button><button class="btn dark" id="resetBtn">إعادة المسابقة</button></div>
+ <div class="notice" id="status">اختاري مجموعة، ثم اختاري سؤالًا. بعد تحديد الإجابة الصحيحة، تُضاف النقاط تلقائيًا للمجموعة المختارة.</div>
+</section>
+<section class="section">
+ <div class="section-head"><h2>🎯 اختاري المستوى</h2><span class="muted">كل سؤال يُستخدم مرة واحدة</span></div>
+ <div class="levels" id="levels"><button class="level active" data-level="سهل">🌱 سهل</button><button class="level" data-level="متوسط">🌼 متوسط</button><button class="level" data-level="صعب">🔥 صعب</button></div>
+</section>
+<section class="section">
+ <div class="section-head"><h2 id="questionsTitle">أسئلة المستوى السهل</h2><span class="muted" id="count">0 / 12 سؤال</span></div>
+ <div class="qgrid" id="qgrid"></div>
+ <div class="notice">💡 اختاري المجموعة صاحبة الدور قبل فتح السؤال. بمجرد اختيار إجابة صحيحة تُضاف النقاط دون الحاجة لإدخالها يدويًا.</div>
+</section>
+<footer>سين وجيم • مشروع الطالبتين ريتال مهدي وهمس الغامدي 💗</footer>
+</div>
+<div class="overlay" id="questionOverlay"><div class="modal">
+ <button class="close" id="closeQuestion">✕</button><span class="badge" id="modalLevel">سهل • 100 نقطة</span><h2 id="modalQuestion">السؤال</h2>
+ <div class="options" id="options"></div><div class="result" id="result"></div>
+ <div class="answer" id="modalAnswer"></div>
+ <div class="modal-actions"><button class="btn soft" id="revealAnswer">👀 إظهار الإجابة</button><button class="btn primary" id="nextQuestion" style="display:none">السؤال التالي ←</button><button class="btn pink" id="skipBtn">تخطّي السؤال</button></div>
+ </div></div>
+<div class="overlay" id="settingsOverlay"><div class="modal">
+ <button class="close" id="closeSettings">✕</button><span class="badge">⚙️ تخصيص التجربة</span><h2>إعدادات المسابقة</h2>
+ <div class="settings-grid">
+  <div class="setting"><label class="toggle"><input type="checkbox" id="musicToggle" checked> تشغيل الموسيقى</label><div class="muted">موسيقى خلفية هادئة أثناء اللعب (تبدأ بعد الضغط على الصفحة).</div></div>
+  <div class="setting"><label class="toggle"><input type="checkbox" id="soundToggle" checked> المؤثرات الصوتية</label><div class="muted">صوت بسيط عند الإجابة الصحيحة أو الخاطئة.</div></div>
+  <div class="setting"><label class="toggle"><input type="checkbox" id="confettiToggle" checked> الاحتفال والكونفيتي</label><div class="muted">نجوم وورق احتفالي عند الفوز وكسب النقاط.</div></div>
+  <div class="setting"><label class="toggle"><input type="checkbox" id="autoNextToggle" checked> الانتقال التلقائي</label><div class="muted">إظهار زر السؤال التالي بعد تسجيل الإجابة.</div></div>
+  <div class="setting"><label for="easyPoints">نقاط السهل</label><select id="easyPoints"><option value="100">100 نقطة</option><option value="200">200 نقطة</option><option value="50">50 نقطة</option></select></div>
+  <div class="setting"><label for="mediumPoints">نقاط المتوسط</label><select id="mediumPoints"><option value="200">200 نقطة</option><option value="300">300 نقطة</option><option value="100">100 نقطة</option></select></div>
+  <div class="setting"><label for="hardPoints">نقاط الصعب</label><select id="hardPoints"><option value="300">300 نقطة</option><option value="400">400 نقطة</option><option value="200">200 نقطة</option></select></div>
+  <div class="setting"><label for="volume">مستوى صوت الموسيقى: <span id="volumeLabel">20%</span></label><input type="range" id="volume" min="0" max="60" value="20"></div>
+ </div>
+ <div class="row-actions"><button class="btn primary" id="saveSettings">حفظ الإعدادات</button><button class="btn soft" id="musicTest">▶ تجربة الموسيقى</button></div>
+ <div class="notice">ملاحظة: الموسيقى مولّدة داخل المتصفح، ولا تحتاج اتصالًا بالإنترنت. إذا لم يبدأ الصوت تلقائيًا، اضغطي «تجربة الموسيقى» مرة واحدة.</div>
+ </div></div>
+<div class="winner" id="winnerScreen"><div class="winner-inner"><div class="trophy">🏆</div><div class="kicker">لحظة التتويج</div><h2 id="winnerName">المجموعة الفائزة!</h2><div class="winner-score" id="winnerScore">0 نقطة</div><p id="winnerMessage">ألف مبروك! قدمتن أداءً رائعًا واستحققن الفوز بكل جدارة 💗</p><button class="btn" id="closeWinner">العودة إلى المسابقة</button></div></div>
+<div class="toast" id="toast"><span class="spark">✨</span><span id="toastText">كسبت المجموعة نقاطًا!</span></div>
+<script>
+const questions={
+ 'سهل':[
+ {q:'ما نوع البيانات للأعداد الصحيحة مثل 12؟',options:['float','int','str','bool'],correct:1,answer:'ب) int',points:100},
+ {q:'ما وظيفة الأمر print()؟',options:['إدخال البيانات','تشغيل الجهاز','عرض النتائج','إنشاء مجلد'],correct:2,answer:'ج) عرض النتائج',points:100},
+ {q:'ما اسم البرنامج المستخدم لكتابة وتشغيل بايثون في الصفحات؟',options:['Excel','PowerPoint','Word','PyCharm'],correct:3,answer:'د) PyCharm',points:100},
+ {q:'ماذا تعني القيمة True؟',options:['صحيح','خطأ','نص','عدد عشري'],correct:0,answer:'أ) صحيح',points:100}
+ ],
+ 'متوسط':[
+ {q:'ما نوع البيانات للقيمة 4.5؟',options:['int','str','float','bool'],correct:2,answer:'ج) float',points:200},
+ {q:'ما رمز الضرب في بايثون؟',options:['×','*','/','='],correct:1,answer:'ب) *',points:200},
+ {q:'ماذا يعني الرمز != ؟',options:['يساوي','أكبر من','لا يساوي','أصغر من'],correct:2,answer:'ج) لا يساوي',points:200},
+ {q:'ما وظيفة input()؟',options:['عرض النتائج','استقبال إدخال المستخدم','حذف الملف','إغلاق البرنامج'],correct:1,answer:'ب) استقبال إدخال المستخدم',points:200}
+ ],
+ 'صعب':[
+ {q:'ما ناتج العملية 2 ** 3؟',options:['6','5','9','8'],correct:3,answer:'د) 8',points:300},
+ {q:'ما ناتج المقارنة 5 > 8؟',options:['True','False','5','8'],correct:1,answer:'ب) False',points:300},
+ {q:'ما ناتج الشرط (5 > 2) and (3 < 1)؟',options:['True','False','3','لا توجد نتيجة'],correct:1,answer:'ب) False',points:300},
+ {q:'إذا كانت x = 5، ثم نفذنا x += 2، فما قيمة x؟',options:['2','5','7','10'],correct:2,answer:'ج) 7',points:300}
+ ]};
+const names=['المجموعة أ','المجموعة ب','المجموعة ج'],colors=['#f477a8','#8874e8','#34bfa1'];
+let scores=[0,0,0],selectedGroup=0,currentLevel='سهل',active=null,used=new Set(),toastTimer,audioCtx=null,masterGain=null,musicTimer=null,musicOn=true,soundOn=true,confettiOn=true,autoNext=true,volume=.2,questionRecorded=false;
+const $=id=>document.getElementById(id);
+function pointsFor(level){return Number(({سهل:$('easyPoints'),متوسط:$('mediumPoints'),صعب:$('hardPoints')}[level]).value)}
+function renderScores(){const board=$('scoreboard');board.innerHTML='';names.forEach((name,i)=>{const card=document.createElement('div');card.className='team'+(selectedGroup===i?' selected':'');card.style.setProperty('--team',colors[i]);card.innerHTML=`<div class="team-name">${name}</div><div class="team-score" id="score${i}">${scores[i]}</div><div class="team-label">نقطة</div><button class="select-team" data-team="${i}">${selectedGroup===i?'المجموعة المختارة ✓':'اختيار المجموعة'}</button>`;board.appendChild(card)});board.querySelectorAll('[data-team]').forEach(b=>b.onclick=()=>{selectedGroup=Number(b.dataset.team);renderScores();$('status').textContent='الدور الآن لـ '+names[selectedGroup]+'. اختاري سؤالًا من اللوحة.'})}
+function renderQuestions(){$('questionsTitle').textContent='أسئلة المستوى '+currentLevel;const grid=$('qgrid');grid.innerHTML='';questions[currentLevel].forEach((q,i)=>{const key=currentLevel+'-'+i,wasUsed=used.has(key),b=document.createElement('button');b.className='qcard'+(wasUsed?' used':'');b.disabled=wasUsed;b.innerHTML=`<span class="num">السؤال ${levelsIndex(currentLevel)*4+i+1} • ${pointsFor(currentLevel)} نقطة</span><span class="qtitle">${q.q}</span><span class="qstate">${wasUsed?'تم استخدامه ✓':'اضغطي لفتح السؤال ←'}</span>`;b.onclick=()=>openQuestion(currentLevel,i);grid.appendChild(b)});$('count').textContent=used.size+' / 12 سؤال'}
+function levelsIndex(l){return ['سهل','متوسط','صعب'].indexOf(l)}
+function openQuestion(level,i){if(used.has(level+'-'+i))return;active={level,i,key:level+'-'+i,q:questions[level][i]};questionRecorded=false;const q=active.q;$('modalLevel').textContent=level+' • '+pointsFor(level)+' نقطة';$('modalQuestion').textContent=q.q;$('modalAnswer').textContent='الإجابة الصحيحة: '+q.answer;$('modalAnswer').classList.remove('show');$('result').className='result';$('result').textContent='';$('options').innerHTML='';$('nextQuestion').style.display='none';$('skipBtn').style.display='';$('revealAnswer').style.display='';['أ','ب','ج','د'].forEach((letter,idx)=>{const b=document.createElement('button');b.className='option';b.innerHTML=`<span class="letter">${letter}</span>${q.options[idx]}`;b.onclick=()=>chooseAnswer(idx,b);$('options').appendChild(b)});$('questionOverlay').classList.add('show');startMusicIfNeeded()}
+function chooseAnswer(idx,button){if(questionRecorded)return;questionRecorded=true;const q=active.q,correct=idx===q.correct,opts=[...$('options').querySelectorAll('button')];opts.forEach((b,i)=>{b.disabled=true;if(i===q.correct)b.classList.add('correct')});if(!correct)button.classList.add('wrong');const result=$('result');result.className='result show '+(correct?'ok':'no');result.textContent=correct?'إجابة صحيحة! أحسنتن 🎉 ستُضاف '+pointsFor(active.level)+' نقطة إلى '+names[selectedGroup]+'.':'مو هذه الإجابة الصحيحة. الإجابة الصحيحة هي: '+q.answer+'. لم تُضف نقاط.';if(correct){scores[selectedGroup]+=pointsFor(active.level);renderScores();const scoreEl=$('score'+selectedGroup);if(scoreEl){scoreEl.classList.remove('pop');void scoreEl.offsetWidth;scoreEl.classList.add('pop')}notify('🎉 '+names[selectedGroup]+' كسبت '+pointsFor(active.level)+' نقطة!');if(confettiOn)confettiBurst(16);playTone(true);$('status').textContent=names[selectedGroup]+' كسبت '+pointsFor(active.level)+' نقطة. مجموعها الآن '+scores[selectedGroup]+' نقطة.'}else{notify('💗 المحاولة القادمة أفضل!');playTone(false);$('status').textContent='إجابة غير صحيحة. لم تُخصم نقاط من أي مجموعة.'}used.add(active.key);renderQuestions();$('skipBtn').style.display='none';$('nextQuestion').style.display='';$('revealAnswer').style.display='none';if(autoNext)$('nextQuestion').textContent=used.size===12?'عرض النتيجة النهائية 🏆':'السؤال التالي ←'}
+function nextQuestion(){active=null;$('questionOverlay').classList.remove('show');if(used.size===12)showWinner()}
+function notify(message){$('toastText').textContent=message;$('toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.remove('show'),3200)}
+function confettiBurst(n){if(!confettiOn)return;for(let i=0;i<n;i++){const c=document.createElement('i');c.className='confetti';c.style.left=Math.random()*100+'%';c.style.background=['#ffe38d','#ff8db7','#7ddbc4','#ffffff','#b9a8ff'][i%5];c.style.animationDuration=(2+Math.random()*3)+'s';c.style.animationDelay=(Math.random()*.6)+'s';$('winnerScreen').appendChild(c);setTimeout(()=>c.remove(),5500)}}
+function showWinner(){const max=Math.max(...scores),w=scores.map((s,i)=>s===max?i:-1).filter(i=>i>=0);if(w.length===3){$('winnerName').textContent='تعادل بين كل المجموعات!';$('winnerScore').textContent=max+' نقطة لكل مجموعة';$('winnerMessage').textContent='كلكن مبدعات! استمرّوا بالحماس والتحدّي 💗'}else if(w.length>1){$('winnerName').textContent='تعادل بين '+w.map(i=>names[i]).join(' و ');$('winnerScore').textContent=max+' نقطة';$('winnerMessage').textContent='منافسة قوية جدًا! تستحق المجموعات المتعادلة كل التهنئة 🎉'}else{$('winnerName').textContent='مبروك '+names[w[0]]+'!';$('winnerScore').textContent=max+' نقطة';$('winnerMessage').textContent='ألف مبروك الفوز! قدمتن أداءً رائعًا، وذكاؤكن وتعاونكن وصّلكن للقمة! 💗'}$('winnerScreen').classList.add('show');confettiBurst(75);playTone(true)}
+function initAudio(){const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;audioCtx=new AC();masterGain=audioCtx.createGain();masterGain.gain.value=volume;masterGain.connect(audioCtx.destination)}
+function tone(freq,duration,when=0,type='sine',gain=.08){if(!audioCtx||!masterGain)return;const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type=type;o.frequency.value=freq;g.gain.setValueAtTime(.0001,audioCtx.currentTime+when);g.gain.exponentialRampToValueAtTime(gain,audioCtx.currentTime+when+.02);g.gain.exponentialRampToValueAtTime(.0001,audioCtx.currentTime+when+duration);o.connect(g);g.connect(masterGain);o.start(audioCtx.currentTime+when);o.stop(audioCtx.currentTime+when+duration+.03)}
+function playTone(ok){if(!soundOn)return;if(!audioCtx)initAudio();if(!audioCtx)return;if(audioCtx.state==='suspended')audioCtx.resume();if(ok){tone(660,.18,0,'sine',.09);tone(880,.24,.12,'sine',.08);tone(1100,.28,.25,'sine',.07)}else{tone(260,.22,0,'triangle',.06);tone(210,.3,.16,'triangle',.05)}}
+function startMusicIfNeeded(){if(!musicOn||musicTimer)return;if(!audioCtx)initAudio();if(!audioCtx)return;audioCtx.resume();let step=0;const notes=[392,494,587,494,440,523,659,523];musicTimer=setInterval(()=>{if(!musicOn||!audioCtx)return;tone(notes[step%notes.length],.55,0,'sine',.025);step++},650)}
+function stopMusic(){if(musicTimer){clearInterval(musicTimer);musicTimer=null}}
+function saveSettings(){musicOn=$('musicToggle').checked;soundOn=$('soundToggle').checked;confettiOn=$('confettiToggle').checked;autoNext=$('autoNextToggle').checked;volume=Number($('volume').value)/100;if(masterGain)masterGain.gain.value=volume;if(musicOn)startMusicIfNeeded();else stopMusic();renderQuestions();$('settingsOverlay').classList.remove('show');notify('تم حفظ إعدادات المسابقة ⚙️')}
+document.querySelectorAll('.level').forEach(b=>b.onclick=()=>{currentLevel=b.dataset.level;document.querySelectorAll('.level').forEach(x=>x.classList.toggle('active',x===b));renderQuestions()});
+$('closeQuestion').onclick=()=>{$('questionOverlay').classList.remove('show');active=null};$('skipBtn').onclick=()=>{if(active){used.add(active.key);renderQuestions()}nextQuestion()};$('nextQuestion').onclick=nextQuestion;
+$('revealAnswer').onclick=()=>{$('modalAnswer').classList.toggle('show');$('revealAnswer').textContent=$('modalAnswer').classList.contains('show')?'🙈 إخفاء الإجابة':'👀 إظهار الإجابة'};
+$('settingsBtn').onclick=()=>$('settingsOverlay').classList.add('show');$('closeSettings').onclick=()=>$('settingsOverlay').classList.remove('show');$('saveSettings').onclick=saveSettings;
+$('volume').oninput=()=>{$('volumeLabel').textContent=$('volume').value+'%';if(masterGain)masterGain.gain.value=Number($('volume').value)/100};
+$('musicTest').onclick=()=>{if(!audioCtx)initAudio();if(audioCtx)audioCtx.resume();musicOn=true;$('musicToggle').checked=true;startMusicIfNeeded();tone(523,.2,0);tone(659,.2,.2);tone(784,.3,.4)};
+$('winnerBtn').onclick=showWinner;$('closeWinner').onclick=()=>$('winnerScreen').classList.remove('show');
+$('resetBtn').onclick=()=>{if(confirm('هل تريدين إعادة المسابقة وتصفير جميع النقاط والأسئلة المستخدمة؟')){scores=[0,0,0];selectedGroup=0;used.clear();active=null;$('questionOverlay').classList.remove('show');$('winnerScreen').classList.remove('show');$('status').textContent='بدأت مسابقة جديدة! اختاري المجموعة ثم السؤال.';renderScores();renderQuestions()}};
+renderScores();renderQuestions();
+</script>
+</body></html>
